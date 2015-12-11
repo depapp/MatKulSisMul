@@ -1,0 +1,17 @@
+clc
+clear all
+fs=100
+f=50
+t=0:0.01/fs:1/f;
+y=3*cos(2*f*pi*t);
+subplot(2:1:1)
+plot(t,y) 
+title('plot')
+grid
+fs=100
+t=0:0.01/fs:1/f;
+yy=3*cos(2*f*pi*t);
+subplot(2:1:2)
+plot(tt,yy)
+title('plot fs 75')
+grid

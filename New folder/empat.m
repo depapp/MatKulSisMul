@@ -1,0 +1,10 @@
+fs = 8000;
+t = 0:1/fs:2;
+f = 500*t;
+v = 0.5*cos(2*pi*(f.*t));
+sound(v,fs);
+plot(t,v);
+title('Chirp signal');
+axis([0 .01 -1 1]);
+xlabel('Time (sec)');
+ylabel('v(t)');

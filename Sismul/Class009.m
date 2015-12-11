@@ -1,0 +1,10 @@
+clear all;
+fs=8000;
+suara=audiorecorder(fs,16,1);
+disp('Start speaking');
+recordblocking(suara,3);
+disp('Stop speaking');
+y=getaudiodata(suara);
+plot(y);
+play(suara);
+wavwrite(y,'jandika');

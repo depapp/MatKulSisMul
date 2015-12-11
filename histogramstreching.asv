@@ -1,0 +1,4 @@
+p=imread('romania.jpg');
+imshow(p);
+p=p(:,1);
+q=imadjust(p,[0,1],[1,0],200);

@@ -1,0 +1,104 @@
+--==========
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+package mypackage is
+   type data_size is array(1 to 200) of integer;
+   
+ end package; 
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use std.textio.all;
+use work.mypackage.all;
+---- Uncomment the following library declaration if instantiating
+---- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity textio_test is
+port(
+ clk :inout std_logic;
+ data : inout integer
+ 
+ );
+end textio_test;
+ 
+ 
+architecture Behavioral of textio_test is
+signal i_data : integer;
+signal s:integer; --
+signal data1,data2,data3,data4,data5,data6:integer; --
+signal    linenumber : integer:=1; 
+signal endoffile : bit := '0';
+
+
+begin
+ 
+process(clk)
+ 
+file in_file: text is in "ADC.txt";
+variable buff : line;
+variable good : boolean;
+variable tmp : integer;
+
+ 
+begin
+  
+if (rising_edge(clk)) and not(endfile(in_file)) then
+ readline(in_file, buff);
+ read(buff, tmp, good);
+ i_data<=tmp;
+ data1 <= i_data;
+ data2 <= data1;
+ data3 <= data2;
+ data4 <= data3;
+ data5 <= data4;
+ data6 <= data5;
+ s <= (data1 + data2 + data3 + data4 + data5 + data6 )/6;
+elsif endfile(in_file) then
+ file_close(in_file);
+end if;
+ 
+end process;
+DUT:process(clk)
+begin
+  
+  if (clk'event and clk='1') then
+    data <=s;
+    
+  end if;
+  end process;
+  writing :
+process
+    file      outfile  : text is out "vhdl_out.txt";  --declare output file
+    variable  outline  : line;   --line number declaration  
+begin
+wait until clk = '0' and clk'event;
+if(endoffile='0') then   --if the file end is not reached.
+--write(linenumber,value(real type),justified(side),field(width),digits(natural));
+write(outline,data, right, 8);
+-- write line to external file.
+writeline(outfile, outline);
+linenumber <= linenumber + 1;
+else
+null;
+end if;
+
+end process writing;
+
+  
+  CLOCK:process
+  begin
+    for i in 1 to 250 loop
+    clk <='1';wait for 1 us;
+    clk <='0';wait for 1 us;
+     end loop;
+    wait;
+  
+  end process;
+end Behavioral;
+ 
+ 
+ 

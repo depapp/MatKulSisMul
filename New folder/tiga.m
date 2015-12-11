@@ -1,0 +1,11 @@
+fs = 8000;
+t = 0:1/fs:2;
+v1 = 0.5*cos(2*pi*440*t);
+v2 = 0.5*cos(2*pi*524*t);
+v = v1 + v2;
+sound(v,fs);
+plot(t,v);
+title('2 nada');
+axis([0 .01 -1 1]);
+xlabel('Time (sec)');
+ylabel('v2(t)');

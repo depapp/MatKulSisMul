@@ -1,0 +1,8 @@
+clear all;
+f=800;
+fs=16000;
+t=0:1/fs:1.0;
+y=sin(2*pi*f*t);
+sound(y,fs);
+plot(t,y); axis([0 0.1 -1 1]);
+title('Sinyal Sinus (f=800 Hz), sampling 16000 Hz');
